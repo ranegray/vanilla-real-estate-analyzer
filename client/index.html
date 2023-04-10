@@ -35,64 +35,68 @@
     <div
       class="-z-10 w-7/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg"
     >
-      <form
-        action="/api/property"
-        method="post"
-        class="flex flex-col bg-neutral-800 w-full m-auto p-3 rounded-lg"
-      >
+      <form class="flex flex-col bg-neutral-800 w-full m-auto p-3 rounded-lg">
         <h2 class="text-white font-semibold text-lg my-2">Property Form</h2>
         <input
           type="text"
+          name="name"
           placeholder="property nickname"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-neutral-700 rounded-t-md"
         />
         <input
           type="text"
+          name="address"
           placeholder="address"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
         <input
           type="number"
+          name="purchase_price"
           placeholder="purchase price"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
         <!-- might be better as select -->
         <input
           type="text"
+          name="loan_down_payment"
           placeholder="loan down payment"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
         <!-- loan length might be better as a select -->
         <input
           type="number"
+          name="loan_length"
           placeholder="loan length"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
         <input
           type="number"
+          name="interest_rate"
           placeholder="interest rate"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
         <input
           type="number"
+          name="rental_income"
           placeholder="rental income"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
         <input
           type="number"
+          name="expenses"
           placeholder="expenses"
-          class="bg-neutral-800 pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 rounded-b-md border-neutral-700"
           required
         />
         <button
           type="submit"
-          class="bg-purple-400 w-fit m-1 px-6 py-1 text-white font-semibold rounded-xl"
+          class="bg-purple-400 w-fit m-2 px-6 py-1 text-white font-semibold rounded-xl"
         >
           Analyze Property
         </button>
