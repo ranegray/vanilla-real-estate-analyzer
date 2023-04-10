@@ -16,5 +16,8 @@ submitBtn.addEventListener("click", async (e) => {
 //     body: JSON.stringify(formDataObj)
 //   });
 
+// add a copy straight to the DOM. I think its called optimistic loading or something like that.
+  
+
   console.log(formDataObj);
 });
