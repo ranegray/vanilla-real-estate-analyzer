@@ -1,0 +1,1 @@
+// define get and post functions for all routes

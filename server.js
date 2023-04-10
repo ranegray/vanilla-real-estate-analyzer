@@ -17,10 +17,12 @@ app.get("/", (req, res) => {
   res.json({ message: "server is connected" });
 });
 
-// api routes
-app.get("/api/properties", (req, res) => {});
-app.get("/api/properties/:id", (req, res) => {});
-app.post("/api/properties", (req, res) => {});
+// protected api route
+app.use('/api', protect, router)
+
+// signin/registration routes
+app.post('/user', createNewUser)
+app.post('/signin', signIn)
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
