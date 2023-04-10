@@ -9,6 +9,19 @@
 </head>
 <body>
     <h1>Hello World!</h1>
+    <h2>Property Form</h2>
+    <form action="/api/property" method="post">
+        <input type="text" placeholder="property nickname">
+        <input type="text" placeholder="address" required>
+        <input type="number" placeholder="purchase price" required>
+        // might be better as select
+        <input type="text" placeholder="loan down payment" required>
+        // loan length might be better as a select
+        <input type="number" placeholder="loan length" required>
+        <input type="number" placeholder="interest rate" required>
+        <input type="number" placeholder="rental income" required>
+        <input type="number" placeholder="expenses" required>
+    </form>
     <script src="script.js" defer></script>
 </body>
 </html>
