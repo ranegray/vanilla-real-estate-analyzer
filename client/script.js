@@ -1,5 +1,15 @@
 const submitBtn = document.querySelector("button");
 const propertiesEl = document.querySelector("#property-list");
+const editModal = document.querySelector('#edit-modal')
+const editModalForm = document.querySelector('#edit-modal-form')
+
+editModal.addEventListener('click', () => {
+  editModal.classList.toggle('hidden')
+})
+
+editModalForm.addEventListener('click', (e) => {
+  e.stopPropagation()
+})
 
 fetch("http://localhost:3000/api/properties")
   .then((response) => response.json())
@@ -30,6 +40,10 @@ fetch("http://localhost:3000/api/properties")
     </svg>`;
       editBtn.addEventListener("click", (e) => {
         e.preventDefault();
+        editModal.classList.toggle('hidden')
+
+        
+
         console.log('edit mode')
       });
       const deleteBtn = document.createElement("button");
@@ -58,16 +72,16 @@ fetch("http://localhost:3000/api/properties")
       );
       propertyCard.innerHTML = `
         <div>
-          <h2 class="font-semibold">${name}</h2>
-          <h3>${address}</h3>
-          <p>${formatCurrency.format(purchase_price)}</p>
+          <h2 class="font-semibold" contenteditable="false">${name}</h2>
+          <h3 contenteditable="false">${address}</h3>
+          <p contenteditable="false">${formatCurrency.format(purchase_price)}</p>
           <details>
             <summary>See More</summary>
-            <p>Down payment: ${down_payment}</p>
-            <p>Loan length: ${loan_length}</p>
-            <p>Interest rate: ${interest_rate}</p>
-            <p>Income: ${rental_income}</p>
-            <p>Expenses: ${expenses}</p>
+            <p contenteditable="false">Down payment: ${down_payment}</p>
+            <p contenteditable="false">Loan length: ${loan_length}</p>
+            <p contenteditable="false">Interest rate: ${interest_rate}</p>
+            <p contenteditable="false">Income: ${rental_income}</p>
+            <p contenteditable="false">Expenses: ${expenses}</p>
           </details>
         </div>
         <div>
