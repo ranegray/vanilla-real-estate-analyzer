@@ -12,6 +12,7 @@ const pool = new Pool({ connectionString });
 const app = express();
 
 app.use(cors());
+// app.use(express.static('./client'))
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -20,7 +21,7 @@ app.get("/", (req, res) => {
   res.json({ message: "server is connected" });
 });
 app.get("/api/properties", async (req, res) => {
-  const properties = await pool.query("SELECT * FROM properties");
+  const properties = await pool.query("SELECT * FROM properties WHERE deleted_at IS NULL");
   res.json({ data: properties.rows });
 });
 app.get("/api/properties/:id", async (req, res) => {
@@ -36,6 +37,13 @@ app.post("/api/properties", (req, res) => {
   );
   res.json({ message: "success" });
 });
+// app.patch("/api/properties/:id", (req, res) => {
+//   pool.query("UPDATE properties SET ")
+// })
+app.delete("/api/properties/:id", (req, res) => {
+  pool.query("UPDATE properties SET deleted_at = NOW() WHERE id = $1", [req.params.id])
+  res.json({ message: "success" })
+})
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
