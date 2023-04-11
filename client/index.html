@@ -32,10 +32,10 @@
         </nav>
       </div>
     </header>
-    <div id="edit-modal" class="fixed left-0 top-0 z-50 h-full w-full bg-black bg-opacity-40 hidden">
+    <div id="edit-modal" class="fixed left-0 top-0 z-50 h-screen w-full bg-black bg-opacity-40 hidden">
       <div id="edit-modal-form" class="bg-neutral-800 w-8/12 my-64 mx-auto rounded-md">
         <form id="modal-form" class="flex flex-col bg-neutral-800 w-full m-auto p-3 rounded-lg">
-          <h2 class="text-white font-semibold text-lg my-2">Property Form</h2>
+          <h2 class="text-white font-semibold text-lg my-2">Edit Property</h2>
           <input
             type="text"
             name="name"
@@ -95,9 +95,10 @@
           />
           <button
             type="submit"
+            id="edit-form-button"
             class="bg-purple-400 w-fit m-2 px-6 py-1 text-white font-semibold rounded-xl"
           >
-            Analyze Property
+            Save Changes
           </button>
         </form>
       </div>
@@ -166,6 +167,7 @@
         />
         <button
           type="submit"
+          id="property-form-button"
           class="bg-purple-400 w-fit m-2 px-6 py-1 text-white font-semibold rounded-xl"
         >
           Analyze Property

@@ -1,15 +1,17 @@
-const submitBtn = document.querySelector("button");
+const submitBtn = document.querySelector("#property-form-button");
+const saveBtn = document.querySelector("#edit-form-button");
 const propertiesEl = document.querySelector("#property-list");
-const editModal = document.querySelector('#edit-modal')
-const editModalForm = document.querySelector('#edit-modal-form')
+const editModal = document.querySelector("#edit-modal");
+const editModalForm = document.querySelector("#edit-modal-form");
+const modalForm = document.querySelector("#modal-form");
 
-editModal.addEventListener('click', () => {
-  editModal.classList.toggle('hidden')
-})
+editModal.addEventListener("click", () => {
+  editModal.classList.toggle("hidden");
+});
 
-editModalForm.addEventListener('click', (e) => {
-  e.stopPropagation()
-})
+editModalForm.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
 
 fetch("http://localhost:3000/api/properties")
   .then((response) => response.json())
@@ -40,11 +42,23 @@ fetch("http://localhost:3000/api/properties")
     </svg>`;
       editBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        editModal.classList.toggle('hidden')
+        editModal.classList.toggle("hidden");
+        modalForm.setAttribute("data-id", id);
 
-        
+        document.querySelector("input[name='name']").value = name;
+        document.querySelector("input[name='address']").value = address;
+        document.querySelector("input[name='purchase_price']").value =
+          purchase_price;
+        document.querySelector("input[name='down_payment']").value =
+          down_payment;
+        document.querySelector("input[name='loan_length']").value = loan_length;
+        document.querySelector("input[name='interest_rate']").value =
+          interest_rate;
+        document.querySelector("input[name='rental_income']").value =
+          rental_income;
+        document.querySelector("input[name='expenses']").value = expenses;
 
-        console.log('edit mode')
+        console.log("edit mode");
       });
       const deleteBtn = document.createElement("button");
       deleteBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -52,8 +66,10 @@ fetch("http://localhost:3000/api/properties")
     </svg>`;
       deleteBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/properties/${id}`, {method: "delete"})
-        console.log('deleted')
+        fetch(`http://localhost:3000/api/properties/${id}`, {
+          method: "delete",
+        });
+        console.log("deleted");
       });
       const buttonDiv = document.createElement("div");
       buttonDiv.append(editBtn);
@@ -71,10 +87,12 @@ fetch("http://localhost:3000/api/properties")
         "border-neutral-700"
       );
       propertyCard.innerHTML = `
-        <div>
+        <div data-id="${id}">
           <h2 class="font-semibold" contenteditable="false">${name}</h2>
           <h3 contenteditable="false">${address}</h3>
-          <p contenteditable="false">${formatCurrency.format(purchase_price)}</p>
+          <p contenteditable="false">${formatCurrency.format(
+            purchase_price
+          )}</p>
           <details>
             <summary>See More</summary>
             <p contenteditable="false">Down payment: ${down_payment}</p>
@@ -138,4 +156,26 @@ submitBtn.addEventListener("click", async (e) => {
 
   form.reset();
   console.log(formDataObj);
+});
+
+saveBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const { form } = e.target;
+
+  const formData = new FormData(form);
+
+  const formDataObj = {};
+  for (const [key, value] of formData.entries()) {
+    formDataObj[key] = value;
+  }
+
+  const propertyId = form.getAttribute("data-id");
+
+  fetch(`http://localhost:3000/api/properties/${propertyId}`, {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formDataObj),
+  })
 });
