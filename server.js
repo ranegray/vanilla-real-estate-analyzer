@@ -1,10 +1,13 @@
 import express from "express";
 import cors from "cors";
-
-import dotenv from "dotenv";
-dotenv.config();
+import * as dotenv from 'dotenv'
+dotenv.config()
+import pg from "pg";
+const { Pool } = pg;
 
 const port = process.env.PORT || 3000;
+const connectionString = process.env.DATABASE_URL
+const pool = new Pool({ connectionString });
 
 const app = express();
 
@@ -16,14 +19,13 @@ app.get("/", (req, res) => {
   res.status(200);
   res.json({ message: "server is connected" });
 });
-
-// protected api route
-app.use('/api', protect, router)
-
-// signin/registration routes
-app.post('/user', createNewUser)
-app.post('/signin', signIn)
+app.get("/api/properties", async (req, res) => {
+  const properties = await pool.query('SELECT * FROM properties')
+  res.json({data: properties.rows})
+});
+app.get("/properties/:id", (req, res) => {});
+app.post("/properties", (req, res) => {});
 
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
+  console.log(`Server is running on port ${port}`)
+})
