@@ -35,7 +35,7 @@
     <div
       class="-z-10 w-7/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg"
     >
-      <form class="flex flex-col bg-neutral-800 w-full m-auto p-3 rounded-lg">
+      <form id="property-form" class="flex flex-col bg-neutral-800 w-full m-auto p-3 rounded-lg">
         <h2 class="text-white font-semibold text-lg my-2">Property Form</h2>
         <input
           type="text"
@@ -101,6 +101,11 @@
           Analyze Property
         </button>
       </form>
+    </div>
+    <div class="-z-10 w-7/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg">
+      <div id="property-list" class="flex flex-col bg-neutral-800 w-full m-auto p-3 rounded-lg">
+        <!-- add server sent data here upon initial load, DOM manipulation after -->
+      </div>
     </div>
     <script src="script.js" defer></script>
   </body>

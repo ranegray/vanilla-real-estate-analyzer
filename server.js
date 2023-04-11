@@ -23,8 +23,11 @@ app.get("/api/properties", async (req, res) => {
   const properties = await pool.query('SELECT * FROM properties')
   res.json({data: properties.rows})
 });
-app.get("/properties/:id", (req, res) => {});
-app.post("/properties", (req, res) => {});
+app.get("/api/properties/:id", async (req, res) => {
+  const property = await pool.query('SELECT * FROM properties WHERE id = $1', [req.params.id])
+  res.json({data: property.rows[0]})
+});
+app.post("/api/properties", (req, res) => {});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
