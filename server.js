@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import * as dotenv from "dotenv";
 dotenv.config();
 import pg from "pg";
+import { comparePasswords, CreateJWT, hashPassword } from "./auth.js";
 const { Pool } = pg;
 
 const port = process.env.PORT || 3000;
@@ -12,8 +14,10 @@ const pool = new Pool({ connectionString });
 const app = express();
 
 app.use(cors());
-app.use(express.static('client'))
+app.use(cookieParser())
+app.use(express.static("client"));
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
 app.get("/", (req, res) => {
   console.log(req.cookies);
@@ -75,6 +79,54 @@ app.delete("/api/properties/:id", (req, res) => {
     req.params.id,
   ]);
   res.json({ message: "success" });
+});
+
+// authentication
+let options = {
+  maxAge: 1000 * 60 * 15, // would expire after 15 minutes
+  httpOnly: true, // The cookie only accessible by the web server
+  signed: false, // Indicates if the cookie should be signed
+};
+
+// register route
+app.post("/register", async (req, res) => {
+  const hashedPassword = await hashPassword(req.body.password);
+  const result = await pool.query(
+    "INSERT INTO users (username, password, created_at, updated_at) VALUES ($1, $2, NOW(), NOW()) RETURNING *",
+    [req.body.username, hashedPassword]
+  );
+
+  const user = result.rows[0];
+
+  const token = CreateJWT(user);
+  res.cookie("authorization", { token }, options);
+  res.json({ message: "Signup successful" });
+});
+// signin route
+app.post("/signin", async (req, res) => {
+  const result = await pool.query("SELECT * FROM users WHERE username = $1", [
+    req.body.username,
+  ]);
+
+  const user = result.rows[0];
+
+  if (!user) {
+    res.status(401);
+    res.send("User not found");
+    return;
+  }
+
+  const password = await comparePasswords(req.body.password, user.password);
+
+  if (!password) {
+    res.status(401);
+    res.send("Nope");
+    return;
+  }
+
+  const token = CreateJWT(user);
+  res.cookie("authorization", { token }, options);
+  res.send("Login successful");
 });
 
 app.listen(port, () => {
