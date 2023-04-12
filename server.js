@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { protect } from "./auth.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 import pg from "pg";
@@ -14,19 +15,21 @@ const pool = new Pool({ connectionString });
 const app = express();
 
 app.use(cors());
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.static("client"));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   console.log(req.cookies);
   res.status(200);
   res.json({ message: "server is connected" });
 });
-app.get("/api/properties", async (req, res) => {
+app.get("/api/properties", protect, async (req, res) => {
   const properties = await pool.query(
-    "SELECT * FROM properties WHERE deleted_at IS NULL"
+    // fix this route to filter by logged in user
+    "SELECT * FROM properties WHERE deleted_at IS NULL AND user_id = $1",
+    [req.body.user]
   );
   res.json({ data: properties.rows });
 });
@@ -36,11 +39,12 @@ app.get("/api/properties", async (req, res) => {
 //   ]);
 //   res.json({ data: property.rows[0] });
 // });
-app.post("/api/properties", (req, res) => {
+app.post("/api/properties", protect, (req, res) => {
   pool.query(
-    "INSERT INTO properties (name, address, purchase_price, interest_rate, down_payment, loan_length, rental_income, expenses, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())",
+    "INSERT INTO properties (name, user_id, address, purchase_price, interest_rate, down_payment, loan_length, rental_income, expenses, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW())",
     [
       req.body.name,
+      req.body.user,
       req.body.address,
       req.body.purchase_price,
       req.body.interest_rate,
@@ -52,12 +56,13 @@ app.post("/api/properties", (req, res) => {
   );
   res.json({ message: "success" });
 });
-app.patch("/api/properties/:id", async (req, res) => {
+app.patch("/api/properties/:id", protect, async (req, res) => {
   try {
     await pool.query(
-      "UPDATE properties SET name = $1, address = $2, purchase_price = $3, interest_rate = $4, down_payment = $5, loan_length = $6, rental_income = $7, expenses = $8, updated_at = NOW() WHERE id = $9",
+      "UPDATE properties SET name = $1, address = $2, purchase_price = $3, interest_rate = $4, down_payment = $5, loan_length = $6, rental_income = $7, expenses = $8, user_id = $9, updated_at = NOW() WHERE id = $10",
       [
         req.body.name,
+        req.body.user,
         req.body.address,
         req.body.purchase_price,
         req.body.interest_rate,
@@ -74,10 +79,11 @@ app.patch("/api/properties/:id", async (req, res) => {
     res.status(400).json({ message: "Bad Request" });
   }
 });
-app.delete("/api/properties/:id", (req, res) => {
-  pool.query("UPDATE properties SET deleted_at = NOW() WHERE id = $1", [
-    req.params.id,
-  ]);
+app.delete("/api/properties/:id", protect, (req, res) => {
+  pool.query(
+    "UPDATE properties SET deleted_at = NOW() WHERE id = $1 AND user_id = $2",
+    [req.params.id, req.params.user]
+  );
   res.json({ message: "success" });
 });
 
