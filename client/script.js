@@ -65,7 +65,6 @@ fetch("http://localhost:3000/api/properties")
       <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
     </svg>`;
       deleteBtn.addEventListener("click", (e) => {
-        e.preventDefault();
         fetch(`http://localhost:3000/api/properties/${id}`, {
           method: "delete",
         });
@@ -87,7 +86,7 @@ fetch("http://localhost:3000/api/properties")
         "border-neutral-700"
       );
       propertyCard.innerHTML = `
-        <div data-id="${id}">
+        <div data-id="${id}" class="w-2/3">
           <h2 class="font-semibold" contenteditable="false">${name}</h2>
           <h3 contenteditable="false">${address}</h3>
           <p contenteditable="false">${formatCurrency.format(
@@ -95,16 +94,16 @@ fetch("http://localhost:3000/api/properties")
           )}</p>
           <details>
             <summary>See More</summary>
-            <p contenteditable="false">Down payment: ${down_payment}</p>
-            <p contenteditable="false">Loan length: ${loan_length}</p>
-            <p contenteditable="false">Interest rate: ${interest_rate}</p>
-            <p contenteditable="false">Income: ${rental_income}</p>
-            <p contenteditable="false">Expenses: ${expenses}</p>
+            <p contenteditable="false">Down payment: ${formatCurrency.format(down_payment)}</p>
+            <p contenteditable="false">Loan length: ${loan_length} years</p>
+            <p contenteditable="false">Interest rate: ${interest_rate}%</p>
+            <p contenteditable="false">Income: ${formatCurrency.format(rental_income)}</p>
+            <p contenteditable="false">Expenses: ${formatCurrency.format(expenses)}</p>
           </details>
         </div>
-        <div>
+        <div class="flex flex-col items-center">
           <h3 class="font-semibold">Cash Flow</h3>
-          <p>real cash flow</p>
+          <p class=${rental_income - expenses < 0 ? "text-red-500" : ""}>${formatCurrency.format(rental_income - expenses)}/mo</p>
         </div>
       `;
       propertyCard.append(buttonDiv);
@@ -113,7 +112,6 @@ fetch("http://localhost:3000/api/properties")
   });
 
 submitBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
   const form = e.target.form;
   const formData = new FormData(form);
 
@@ -128,33 +126,8 @@ submitBtn.addEventListener("click", async (e) => {
     body: JSON.stringify(formDataObj),
   });
 
-  // add a copy straight to the DOM. I think its called optimistic loading or something like that.
-  const propertyCard = document.createElement("div");
-  propertyCard.classList.add(
-    "text-white",
-    "border-2",
-    "px-2",
-    "py-2",
-    "my-1",
-    "rounded-md",
-    "flex",
-    "justify-between",
-    "border-neutral-700"
-  );
-  propertyCard.innerHTML = `
-    <div>
-      <h2 class="font-semibold">${formDataObj.name}</h2>
-      <h3>${formDataObj.address}</h3>
-      <p>${formatCurrency.format(formDataObj.purchase_price)}</p>
-    </div>
-    <div>
-      <h3 class="font-semibold">Cash Flow</h3>
-      <p>real cash flow</p>
-    </div>
-  `;
-  propertiesEl.append(propertyCard);
+  // TODO: add a copy straight to the DOM. I think its called optimistic loading or something like that.
 
-  form.reset();
   console.log(formDataObj);
 });
 
