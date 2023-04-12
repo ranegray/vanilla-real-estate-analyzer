@@ -66,7 +66,7 @@ fetch("http://localhost:3000/api/properties")
     </svg>`;
       deleteBtn.addEventListener("click", (e) => {
         fetch(`http://localhost:3000/api/properties/${id}`, {
-          method: "delete",
+          method: "DELETE",
         });
         console.log("deleted");
       });
@@ -94,16 +94,24 @@ fetch("http://localhost:3000/api/properties")
           )}</p>
           <details>
             <summary>See More</summary>
-            <p contenteditable="false">Down payment: ${formatCurrency.format(down_payment)}</p>
+            <p contenteditable="false">Down payment: ${formatCurrency.format(
+              down_payment
+            )}</p>
             <p contenteditable="false">Loan length: ${loan_length} years</p>
             <p contenteditable="false">Interest rate: ${interest_rate}%</p>
-            <p contenteditable="false">Income: ${formatCurrency.format(rental_income)}</p>
-            <p contenteditable="false">Expenses: ${formatCurrency.format(expenses)}</p>
+            <p contenteditable="false">Income: ${formatCurrency.format(
+              rental_income
+            )}</p>
+            <p contenteditable="false">Expenses: ${formatCurrency.format(
+              expenses
+            )}</p>
           </details>
         </div>
         <div class="flex flex-col items-center">
           <h3 class="font-semibold">Cash Flow</h3>
-          <p class=${rental_income - expenses < 0 ? "text-red-500" : ""}>${formatCurrency.format(rental_income - expenses)}/mo</p>
+          <p class=${
+            rental_income - expenses < 0 ? "text-red-500" : ""
+          }>${formatCurrency.format(rental_income - expenses)}/mo</p>
         </div>
       `;
       propertyCard.append(buttonDiv);
@@ -121,7 +129,7 @@ submitBtn.addEventListener("click", async (e) => {
   }
 
   fetch("http://localhost:3000/api/properties", {
-    method: "post",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formDataObj),
   });
@@ -133,7 +141,6 @@ submitBtn.addEventListener("click", async (e) => {
 
 saveBtn.addEventListener("click", (e) => {
   const { form } = e.target;
-  e.preventDefault()
   const formData = new FormData(form);
 
   const formDataObj = {};
@@ -142,12 +149,10 @@ saveBtn.addEventListener("click", (e) => {
   }
 
   const propertyId = form.getAttribute("data-id");
-  console.log(JSON.stringify(formDataObj))
-  fetch(`http://localhost:3000/api/properties/${propertyId}`, {
-    method: "patch",
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
+  console.log(JSON.stringify(formDataObj));
+  fetch(`/api/properties/${propertyId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formDataObj),
-  })
+  });
 });

@@ -48,22 +48,27 @@ app.post("/api/properties", (req, res) => {
   );
   res.json({ message: "success" });
 });
-app.patch("/api/properties/:id", (req, res) => {
-  pool.query(
-    "UPDATE properties SET name = $1, address = $2, purchase_price = $3, interest_rate = $4, down_payment = $5, loan_length = $6, rental_income = $7, expenses = $8, updated_at = NOW() WHERE id = $9",
-    [
-      req.body.name,
-      req.body.address,
-      req.body.purchase_price,
-      req.body.interest_rate,
-      req.body.down_payment,
-      req.body.loan_length,
-      req.body.rental_income,
-      req.body.expenses,
-      req.params.id,
-    ]
-  );
-  res.json({ message: "success" });
+app.patch("/api/properties/:id", async (req, res) => {
+  try {
+    await pool.query(
+      "UPDATE properties SET name = $1, address = $2, purchase_price = $3, interest_rate = $4, down_payment = $5, loan_length = $6, rental_income = $7, expenses = $8, updated_at = NOW() WHERE id = $9",
+      [
+        req.body.name,
+        req.body.address,
+        req.body.purchase_price,
+        req.body.interest_rate,
+        req.body.down_payment,
+        req.body.loan_length,
+        req.body.rental_income,
+        req.body.expenses,
+        req.params.id,
+      ]
+    );
+    res.json({ message: "success" });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "Bad Request" });
+  }
 });
 app.delete("/api/properties/:id", (req, res) => {
   pool.query("UPDATE properties SET deleted_at = NOW() WHERE id = $1", [
