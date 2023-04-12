@@ -12,6 +12,7 @@ const pool = new Pool({ connectionString });
 const app = express();
 
 app.use(cors());
+app.use(express.static('./client'))
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -47,7 +48,7 @@ app.post("/api/properties", (req, res) => {
   );
   res.json({ message: "success" });
 });
-app.put("/api/properties/:id", (req, res) => {
+app.patch("/api/properties/:id", (req, res) => {
   pool.query(
     "UPDATE properties SET name = $1, address = $2, purchase_price = $3, interest_rate = $4, down_payment = $5, loan_length = $6, rental_income = $7, expenses = $8, updated_at = NOW() WHERE id = $9",
     [

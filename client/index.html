@@ -32,8 +32,8 @@
         </nav>
       </div>
     </header>
-    <div id="edit-modal" class="fixed left-0 top-0 z-50 h-screen w-full bg-black bg-opacity-40 hidden">
-      <div id="edit-modal-form" class="bg-neutral-800 w-8/12 my-64 mx-auto rounded-md">
+    <div id="edit-modal" class="fixed left-0 top-0 z-50 h-screen w-full bg-black bg-opacity-75 hidden">
+      <div id="edit-modal-form" class="bg-gradient-to-b from-yellow-100 to-purple-400 p-1 w-8/12 my-64 mx-auto rounded-md">
         <form id="modal-form" class="flex flex-col bg-neutral-800 w-full m-auto p-3 rounded-lg">
           <h2 class="text-white font-semibold text-lg my-2">Edit Property</h2>
           <input
@@ -56,7 +56,6 @@
             class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
             required
           />
-          <!-- might be better as select -->
           <input
             type="text"
             name="down_payment"
@@ -64,7 +63,6 @@
             class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
             required
           />
-          <!-- loan length might be better as a select -->
           <input
             type="number"
             name="loan_length"
@@ -129,7 +127,6 @@
           class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
-        <!-- might be better as select -->
         <input
           type="text"
           name="down_payment"
@@ -137,7 +134,6 @@
           class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
           required
         />
-        <!-- loan length might be better as a select -->
         <input
           type="number"
           name="loan_length"

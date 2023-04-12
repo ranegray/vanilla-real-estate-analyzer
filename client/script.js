@@ -133,7 +133,7 @@ submitBtn.addEventListener("click", async (e) => {
 
 saveBtn.addEventListener("click", (e) => {
   const { form } = e.target;
-
+  e.preventDefault()
   const formData = new FormData(form);
 
   const formDataObj = {};
@@ -142,12 +142,12 @@ saveBtn.addEventListener("click", (e) => {
   }
 
   const propertyId = form.getAttribute("data-id");
-
+  console.log(JSON.stringify(formDataObj))
   fetch(`http://localhost:3000/api/properties/${propertyId}`, {
-    method: "put",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: "patch",
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
     body: JSON.stringify(formDataObj),
   })
 });
