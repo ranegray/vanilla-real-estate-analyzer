@@ -159,7 +159,6 @@ submitBtn.addEventListener("click", async (e) => {
 });
 
 saveBtn.addEventListener("click", (e) => {
-  e.preventDefault();
   const { form } = e.target;
 
   const formData = new FormData(form);
