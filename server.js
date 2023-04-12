@@ -26,10 +26,10 @@ app.get("/", (req, res) => {
   res.json({ message: "server is connected" });
 });
 app.get("/api/properties", protect, async (req, res) => {
+  console.log(req.cookies);
   const properties = await pool.query(
-    // fix this route to filter by logged in user
     "SELECT * FROM properties WHERE deleted_at IS NULL AND user_id = $1",
-    [req.body.user]
+    [req.user.id]
   );
   res.json({ data: properties.rows });
 });
@@ -41,7 +41,7 @@ app.get("/api/properties", protect, async (req, res) => {
 // });
 app.post("/api/properties", protect, (req, res) => {
   pool.query(
-    "INSERT INTO properties (name, user_id, address, purchase_price, interest_rate, down_payment, loan_length, rental_income, expenses, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW())",
+    "INSERT INTO properties (name, user_id, address, purchase_price, interest_rate, down_payment, loan_length, rental_income, expenses, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW()) WHERE user_id = $10",
     [
       req.body.name,
       req.body.user,
@@ -52,6 +52,7 @@ app.post("/api/properties", protect, (req, res) => {
       req.body.loan_length,
       req.body.rental_income,
       req.body.expenses,
+      req.user.id,
     ]
   );
   res.json({ message: "success" });
@@ -90,7 +91,7 @@ app.delete("/api/properties/:id", protect, (req, res) => {
 // authentication
 let options = {
   maxAge: 1000 * 60 * 15, // would expire after 15 minutes
-  httpOnly: true, // The cookie only accessible by the web server
+  httpOnly: false, // The cookie only accessible by the web server
   signed: false, // Indicates if the cookie should be signed
 };
 
