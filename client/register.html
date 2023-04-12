@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/tailwind.css" />
+  </head>
+  <body class="bg-neutral-900">
+    <header class="bg-neutral-700 text-white w-full">
+      <div class="w-7/12 flex justify-between m-auto py-4">
+        <a href="/">
+            <h1 class="text-xl font-semibold">Rental Property Analyzer</h1>
+        </a>
+        <nav class="flex">
+
+        </nav>
+      </div>
+    </header>
+    <div
+      class="-z-10 w-7/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg"
+    >
+      <form
+        id="register-form"
+        class="flex flex-col items-center bg-neutral-800 w-full m-auto p-3 rounded-lg"
+      >
+        <h2 class="text-white font-semibold text-lg my-2">Register</h2>
+        <input
+          type="text"
+          name="username"
+          placeholder="username"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-neutral-700 rounded-t-md"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          class="bg-neutral-800 text-white pl-2 py-2 border-2 border-t-0 border-neutral-700"
+          required
+        />
+        <button
+          type="submit"
+          id="register-form-button"
+          class="bg-purple-400 w-fit m-2 px-6 py-1 text-white font-semibold rounded-xl"
+        >
+          Register
+        </button>
+        <div class="flex justify-center text-sm text-neutral-400">
+          <a href="/signin.html">
+            <h3>Already have an account yet?</h3>
+          </a>
+        </div>
+      </form>
+    </div>
+    <script src="register.js" defer></script>
+  </body>
+</html>
