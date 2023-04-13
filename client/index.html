@@ -5,13 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rental Property Analyzer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/tailwind.css" />
+    <script
+      src="https://kit.fontawesome.com/c54ad325ac.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="bg-neutral-900">
     <header class="bg-neutral-700 text-white w-full">
       <div class="w-11/12 flex justify-between m-auto py-4 sm:w-[680px]">
-        <h1 class="text-lg font-semibold sm:text-xl">Rental Property Analyzer</h1>
+        <h1 class="text-lg font-semibold sm:text-xl">
+          Rental Property Analyzer
+        </h1>
         <nav class="flex items-center">
           <a id="dashboard" href="/dashboard.html" class="mr-2 hidden"
             >Dashboard</a
@@ -62,7 +71,8 @@
                   fill-rule="evenodd"
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
                   clip-rule="evenodd"
-                ></path></svg>
+                ></path>
+              </svg>
             </button>
           </p>
           <div
@@ -76,7 +86,10 @@
                 Carefully, consider your expenses
               </h3>
               <p>
-                Consider common costs such as property taxes, insurance, management fees, maintenance, utilities, vacancy, HOA fees, capital expenditures, and legal or accounting fees. Review your specific property and adjust calculations accordingly.
+                Consider common costs such as property taxes, insurance,
+                management fees, maintenance, utilities, vacancy, HOA fees,
+                capital expenditures, and legal or accounting fees. Review your
+                specific property and adjust calculations accordingly.
               </p>
               <a
                 href="/help.html"
@@ -93,7 +106,8 @@
                     fill-rule="evenodd"
                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                     clip-rule="evenodd"
-                  ></path></svg></a>
+                  ></path></svg
+              ></a>
             </div>
             <div data-popper-arrow></div>
           </div>
@@ -164,6 +178,18 @@
         </button>
       </form>
     </div>
+    <footer class="text-neutral-400 text-sm flex flex-col items-center">
+      <hr class="color w-10/12 my-3 sm:w-[600px]" />
+      <p>
+        This project is open source. Feel free to open issues, PRs and
+        contribute on
+        <a
+          href="https://github.com/ranegray/vanilla-real-estate-analyzer"
+          class="text-purple-400"
+          ><i class="fa-brands fa-github"></i> Github</a
+        >!
+      </p>
+    </footer>
 
     <script src="index.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>

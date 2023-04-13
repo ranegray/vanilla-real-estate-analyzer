@@ -7,9 +7,9 @@
     <title>Register</title>
     <link rel="stylesheet" href="/css/tailwind.css" />
     <script
-    src="https://kit.fontawesome.com/c54ad325ac.js"
-    crossorigin="anonymous"
-  ></script>
+      src="https://kit.fontawesome.com/c54ad325ac.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="bg-neutral-900">
     <header class="bg-neutral-700 text-white w-full">
@@ -48,7 +48,7 @@
           class="bg-purple-400 w-fit m-2 px-6 py-1 text-white font-semibold rounded-xl"
         >
           <span id="register-text">Register</span>
-          <span id="loader">
+          <span>
             <div id="loader" class="animate-spin m-auto w-fit hidden">
               <i class="fa-solid fa-spinner text-white"></i>
             </div>
@@ -61,6 +61,20 @@
         </div>
       </form>
     </div>
+
+    <footer class="text-neutral-400 text-sm flex flex-col items-center">
+      <hr class="color w-10/12 my-3 sm:w-[600px]" />
+      <p>
+        This project is open source. Feel free to open issues, PRs and
+        contribute on
+        <a
+          href="https://github.com/ranegray/vanilla-real-estate-analyzer"
+          class="text-purple-400"
+          ><i class="fa-brands fa-github"></i> Github</a
+        >!
+      </p>
+    </footer>
+
     <script src="register.js" defer></script>
   </body>
 </html>
