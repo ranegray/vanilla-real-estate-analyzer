@@ -20,13 +20,13 @@ submitBtn.addEventListener("click", (e) => {
     formDataObj[key] = value;
   }
 
-  fetch("http://localhost:3000/api/properties", {
+  fetch("/api/properties", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formDataObj),
     redirect: "follow",
   }).then((response) => {
-    window.location = "http://localhost:3000/dashboard.html";
+    window.location.replace("/dashboard.html");
     response.json();
   });
 
