@@ -21,7 +21,7 @@ signinForm.addEventListener("submit", (e) => {
   loading.classList.toggle("hidden");
 
   console.log(JSON.stringify(formDataObj));
-  fetch("http://localhost:3000/signin", {
+  fetch("/signin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formDataObj),
@@ -30,7 +30,7 @@ signinForm.addEventListener("submit", (e) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.message === "Login successful") {
-        window.location = "http://localhost:3000/dashboard.html";
+        window.location.replace("/dashboard.html");
       }
     });
 });
