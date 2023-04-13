@@ -5,6 +5,6 @@ logoutBtn.addEventListener("click", (e) => {
   document.cookie = "authorization= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 
   setTimeout(() => {
-    document.location = "http://localhost:3000/signin.html";
+    window.location.replace("/signin.html");
   }, 1000);
 });
