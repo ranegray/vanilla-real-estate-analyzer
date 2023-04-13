@@ -9,24 +9,35 @@
   </head>
   <body class="bg-neutral-900">
     <header class="bg-neutral-700 text-white w-full">
-      <div class="w-7/12 flex justify-between m-auto py-4">
+      <div class="w-11/12 flex justify-between m-auto py-4 sm:w-[680px]">
         <a href="/">
-          <h1 class="text-xl font-semibold">Rental Property Analyzer</h1>
+          <h1 class="text-lg font-semibold sm:text-xl">
+            Rental Property Analyzer
+          </h1>
         </a>
         <nav class="flex"></nav>
       </div>
     </header>
-    <main class="flex justify-center">
-      <div></div>
-      <div>
-        <button
-          id="logout"
-          class="bg-purple-400 w-fit px-6 py-1 text-white font-semibold rounded-xl"
-        >
-          Logout
-        </button>
+    <div
+      class="-z-10 w-11/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg sm:w-[680px]"
+    >
+      <div
+        id="property-list"
+        class="flex flex-col items-center bg-neutral-800 w-full m-auto p-3 rounded-lg"
+      >
+        <h2 class="text-white font-semibold text-center text-xl my-2">
+          Welcome to your profile!
+        </h2>
+        <div class="my-2">
+          <button
+            id="logout"
+            class="bg-purple-400 w-fit px-6 py-1 text-white font-semibold rounded-xl"
+          >
+            Logout
+          </button>
+        </div>
       </div>
-    </main>
+    </div>
     <script src="profile.js" defer></script>
   </body>
 </html>

@@ -14,10 +14,12 @@
   </head>
   <body class="bg-neutral-900">
     <header class="bg-neutral-700 text-white w-full">
-      <div class="w-11/12 flex justify-between m-auto py-4 sm:w-7/12">
-        <h1 class="text-xl font-semibold">Rental Property Analyzer</h1>
-        <nav class="flex">
-          <a href="/" class="mr-2">Add Property</a>
+      <div class="w-11/12 flex justify-between m-auto py-4 sm:w-[680px]">
+        <a href="/">
+          <h1 class="text-lg font-semibold sm:text-xl">Rental Property Analyzer</h1>
+        </a>
+        <nav class="flex items-center">
+          <a href="/" class="mr-2 hidden">Add Property</a>
           <a href="/profile.html">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +45,7 @@
     >
       <div
         id="edit-modal-form"
-        class="bg-gradient-to-b from-yellow-100 to-purple-400 p-1 w-8/12 my-64 mx-auto rounded-md"
+        class="bg-gradient-to-b from-yellow-100 to-purple-400 p-1 w-11/12 my-64 mx-auto rounded-md sm:w-[680px]"
       >
         <form
           id="modal-form"
@@ -117,7 +119,7 @@
       </div>
     </div>
     <div
-      class="-z-10 w-11/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg sm:w-7/12"
+      class="-z-10 w-11/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg sm:w-[680px]"
     >
       <div
         id="property-list"
@@ -129,7 +131,7 @@
         <!-- add server sent data here upon initial load, DOM manipulation after -->
       </div>
     </div>
-    <div class="w-11/12 flex flex-row-reverse m-auto sm:w-7/12">
+    <div class="w-11/12 flex flex-row-reverse m-auto sm:w-[680px]">
         <a href="/">
             <button
               id="add-property-button"
