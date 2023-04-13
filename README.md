@@ -4,7 +4,7 @@ Really loved working on this project. Really proud of what I was able to build w
 
 I want to rebuild it in Next.js to make it way faster and get some experience with a full stack React framework.
 
-If you're able to access the live site, try logging in with ranegray with password 123456 to see some prefilled data to mess with.
+If you're able to access the live site, try logging in with username ***ranegray*** and password ***123456*** to see some prefilled data to mess with.
 
 ## Screenshots & Demo
 
