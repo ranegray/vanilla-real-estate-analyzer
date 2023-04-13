@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/tailwind.css" />
     <script
       src="https://kit.fontawesome.com/c54ad325ac.js"
@@ -13,7 +14,7 @@
   </head>
   <body class="bg-neutral-900">
     <header class="bg-neutral-700 text-white w-full">
-      <div class="w-7/12 flex justify-between m-auto py-4">
+      <div class="w-11/12 flex justify-between m-auto py-4 sm:w-7/12">
         <h1 class="text-xl font-semibold">Rental Property Analyzer</h1>
         <nav class="flex">
           <a href="/" class="mr-2">Add Property</a>
@@ -116,7 +117,7 @@
       </div>
     </div>
     <div
-      class="-z-10 w-7/12 bg-gradient-to-b from-yellow-100 to-purple-400 background-animate m-auto p-1 my-4 rounded-lg"
+      class="-z-10 w-11/12 bg-gradient-to-b from-yellow-100 to-purple-400 m-auto p-1 my-4 rounded-lg sm:w-7/12"
     >
       <div
         id="property-list"
@@ -128,7 +129,7 @@
         <!-- add server sent data here upon initial load, DOM manipulation after -->
       </div>
     </div>
-    <div class="w-7/12 flex flex-row-reverse m-auto">
+    <div class="w-11/12 flex flex-row-reverse m-auto sm:w-7/12">
         <a href="/">
             <button
               id="add-property-button"
@@ -140,5 +141,6 @@
     </div>
 
     <script src="dashboard.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
   </body>
 </html>
