@@ -2,7 +2,9 @@
 
 Really loved working on this project. Really proud of what I was able to build with this and just wish there were some more developer friendly DB and hosting solutions so I could keep this live.
 
-I want to rebuild it in Next.js to make it way faster and get some experience with a full stack React framework. 
+I want to rebuild it in Next.js to make it way faster and get some experience with a full stack React framework.
+
+If you're able to access the live site, try logging in with ranegray with password 123456 to see some prefilled data to mess with.
 
 ## Screenshots & Demo
 
