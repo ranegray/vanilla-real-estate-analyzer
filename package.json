@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
+    "start": "node server.js",
     "build:css": "tailwindcss build src/styles/tailwind.css -o client/css/tailwind.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
