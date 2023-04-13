@@ -41,10 +41,10 @@ app.get("/api/properties", protect, async (req, res) => {
 // });
 app.post("/api/properties", protect, (req, res) => {
   pool.query(
-    "INSERT INTO properties (name, user_id, address, purchase_price, interest_rate, down_payment, loan_length, rental_income, expenses, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW()) WHERE user_id = $10",
+    "INSERT INTO properties (name, user_id, address, purchase_price, interest_rate, down_payment, loan_length, rental_income, expenses, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW())",
     [
       req.body.name,
-      req.body.user,
+      req.user.id,
       req.body.address,
       req.body.purchase_price,
       req.body.interest_rate,
@@ -52,18 +52,17 @@ app.post("/api/properties", protect, (req, res) => {
       req.body.loan_length,
       req.body.rental_income,
       req.body.expenses,
-      req.user.id,
     ]
   );
   res.json({ message: "success" });
 });
 app.patch("/api/properties/:id", protect, async (req, res) => {
   try {
+    // implement dynamic string and fix client side to only send information that has changed to reduce server load
     await pool.query(
-      "UPDATE properties SET name = $1, address = $2, purchase_price = $3, interest_rate = $4, down_payment = $5, loan_length = $6, rental_income = $7, expenses = $8, user_id = $9, updated_at = NOW() WHERE id = $10",
+      "UPDATE properties SET name = $1, address = $2, purchase_price = $3, interest_rate = $4, down_payment = $5, loan_length = $6, rental_income = $7, expenses = $8, updated_at = NOW() WHERE id = $9",
       [
         req.body.name,
-        req.body.user,
         req.body.address,
         req.body.purchase_price,
         req.body.interest_rate,
@@ -83,7 +82,7 @@ app.patch("/api/properties/:id", protect, async (req, res) => {
 app.delete("/api/properties/:id", protect, (req, res) => {
   pool.query(
     "UPDATE properties SET deleted_at = NOW() WHERE id = $1 AND user_id = $2",
-    [req.params.id, req.params.user]
+    [req.params.id, req.user.id]
   );
   res.json({ message: "success" });
 });
@@ -119,7 +118,7 @@ app.post("/signin", async (req, res) => {
 
   if (!user) {
     res.status(401);
-    res.send("User not found");
+    res.json({message: "User not found"});
     return;
   }
 
@@ -127,13 +126,13 @@ app.post("/signin", async (req, res) => {
 
   if (!password) {
     res.status(401);
-    res.send("Nope");
+    res.json({message: "Nope"});
     return;
   }
 
   const token = CreateJWT(user);
   res.cookie("authorization", { token }, options);
-  res.send("Login successful");
+  res.json({message: "Login successful"});
 });
 
 app.listen(port, () => {

@@ -7,6 +7,7 @@ if (document.cookie.indexOf("authorization") != -1){
   dashboardLink.classList.toggle('hidden')
   profileLink.classList.toggle('hidden')
   loginLink.classList.toggle('hidden')
+  submitBtn.toggleAttribute('disabled')
 } 
 
 submitBtn.addEventListener("click", (e) => {

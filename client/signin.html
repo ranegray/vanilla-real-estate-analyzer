@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signin</title>
     <link rel="stylesheet" href="/css/tailwind.css" />
+    <script
+      src="https://kit.fontawesome.com/c54ad325ac.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="bg-neutral-900">
     <header class="bg-neutral-700 text-white w-full">
@@ -43,7 +47,11 @@
           id="signin-form-button"
           class="bg-purple-400 w-fit m-2 px-6 py-1 text-white font-semibold rounded-xl"
         >
-          Login
+          <span id="login-text">Login</span>
+          <span>
+            <div id="loader" class="animate-spin m-auto w-fit hidden">
+              <i class="fa-solid fa-spinner text-white"></i></div
+          ></span>
         </button>
         <div class="flex justify-center text-sm text-neutral-400">
           <a href="/register.html">
