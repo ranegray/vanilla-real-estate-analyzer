@@ -1,3 +1,4 @@
+const submitForm = document.querySelector("#property-form");
 const submitBtn = document.querySelector("#property-form-button");
 const dashboardLink = document.querySelector("#dashboard");
 const profileLink = document.querySelector("#profile");
@@ -11,9 +12,14 @@ if (document.cookie.indexOf("authorization") != -1){
   submitBtn.textContent = "Analyze Property"
 } 
 
-submitBtn.addEventListener("click", (e) => {
+submitForm.addEventListener("submit", (e) => {
+  const form = e.target;
+
+  if (!form.checkValidity()) {
+    return;
+  }
+
   e.preventDefault();
-  const form = e.target.form;
   const formData = new FormData(form);
 
   const formDataObj = {};

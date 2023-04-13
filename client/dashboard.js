@@ -25,7 +25,13 @@ fetch("/api/properties")
       currency: "USD",
     });
 
-    console.log(data);
+    console.log(data.data)
+
+    if (data.data.length < 1) {
+      propertiesEl.innerHTML = "<div class='text-center text-white font-semibold'>You aren't tracking any properties yet.</div>"
+      return;
+    }
+
     data.data.forEach((property) => {
       const {
         id,
