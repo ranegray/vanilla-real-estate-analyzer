@@ -1,12 +1,17 @@
-const signinBtn = document.querySelector("#signin-form-button");
+const signinForm = document.querySelector("#signin-form");
 const signinText = document.querySelector("#login-text");
 const loading = document.querySelector("#loader");
 
-signinBtn.addEventListener("click", (e) => {
+signinForm.addEventListener("submit", (e) => {
+  const form = e.target;
+
+  if (!form.checkValidity()) {
+    return;
+  }
+
   e.preventDefault();
-  const form = e.target.form;
   const formData = new FormData(form);
-    console.log(form)
+  console.log(form);
   const formDataObj = {};
   for (const [key, value] of formData.entries()) {
     formDataObj[key] = value;

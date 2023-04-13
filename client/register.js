@@ -1,9 +1,15 @@
-const registerBtn = document.querySelector("#register-form-button");
+const registerForm = document.querySelector("#register-form");
+const registerText = document.querySelector("#register-text");
+const loading = document.querySelector("#loader");
 
-registerBtn.addEventListener("click", (e) => {
+registerForm.addEventListener("submit", (e) => {
+  const form = e.target;
+
+  if (!form.checkValidity()) {
+    return;
+  }
+  
   e.preventDefault();
-
-  const form = e.target.form;
   const formData = new FormData(form);
 
   const formDataObj = {};
@@ -11,11 +17,18 @@ registerBtn.addEventListener("click", (e) => {
     formDataObj[key] = value;
   }
 
+  registerText.classList.toggle("hidden");
+  loading.classList.toggle("hidden");
+
   fetch("http://localhost:3000/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formDataObj),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      if (data.message === "Signup successful") {
+        window.location = "http://localhost:3000/";
+      }
+    });
 });
