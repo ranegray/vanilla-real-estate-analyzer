@@ -5,7 +5,7 @@ const editModalForm = document.querySelector("#edit-modal-form");
 const modalForm = document.querySelector("#modal-form");
 
 if (document.cookie.indexOf("authorization") == -1) {
-  document.location = "http://localhost:3000/signin.html";
+  window.location.replace("/signin.html");
 }
 
 editModal.addEventListener("click", () => {
@@ -16,7 +16,7 @@ editModalForm.addEventListener("click", (e) => {
   e.stopPropagation();
 });
 
-fetch("http://localhost:3000/api/properties")
+fetch("/api/properties")
   .then((response) => response.json())
   .then((data) => {
     propertiesEl.innerHTML = "";
@@ -72,7 +72,7 @@ fetch("http://localhost:3000/api/properties")
         setTimeout(() => {
           propertyCard.remove();
         }, 500)
-        fetch(`http://localhost:3000/api/properties/${id}`, {
+        fetch(`/api/properties/${id}`, {
           method: "DELETE",
         });
       });
@@ -146,6 +146,6 @@ saveBtn.addEventListener("click", (e) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      window.location = "http://localhost:3000/dashboard.html";
+      window.location.replace("/dashboard.html");
     });
 });
