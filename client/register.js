@@ -8,7 +8,7 @@ registerForm.addEventListener("submit", (e) => {
   if (!form.checkValidity()) {
     return;
   }
-  
+
   e.preventDefault();
   const formData = new FormData(form);
 
@@ -20,7 +20,7 @@ registerForm.addEventListener("submit", (e) => {
   registerText.classList.toggle("hidden");
   loading.classList.toggle("hidden");
 
-  fetch("http://localhost:3000/register", {
+  fetch("/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formDataObj),
@@ -28,7 +28,7 @@ registerForm.addEventListener("submit", (e) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.message === "Signup successful") {
-        window.location = "http://localhost:3000/";
+        window.location.replace("/");
       }
     });
 });
